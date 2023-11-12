@@ -2,6 +2,8 @@
 
 
 #include "MyPawn_PlayerCar.h"
+#include "EnhancedInput/Public/EnhancedInputSubsystems.h"
+#include "EnhancedInput/Public/EnhancedInputComponent.h"
 
 // Sets default values
 AMyPawn_PlayerCar::AMyPawn_PlayerCar()
@@ -15,7 +17,12 @@ AMyPawn_PlayerCar::AMyPawn_PlayerCar()
 
 void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 {
-
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Purple, TEXT("Input Detected")); 
+	const FVector2D MoveAxis = Value.Get<FVector2D>(); 
+	FVector Location = GetActorLocation();
+	Location.X += MoveAxis.X;
+	Location.Y += MoveAxis.Y;
+	SetActorLocation(Location); 
 }
 
 // Called when the game starts or when spawned
@@ -36,6 +43,12 @@ void AMyPawn_PlayerCar::Tick(float DeltaTime)
 void AMyPawn_PlayerCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	APlayerController* PC = Cast<APlayerController>(GetController());
+	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer()); 
+	Subsystem->AddMappingContext(MappingContext, 0);
 
+	UEnhancedInputComponent* PawnInputComp = Cast<UEnhancedInputComponent>(PlayerInputComponent); 
+
+	PawnInputComp->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyPawn_PlayerCar::PawnMove);
 }
 
