@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "TimerManager.h"
 #include "Components/StaticMeshComponent.h"
 #include "InputAction.h"
 #include "MyPawn_PlayerCar.generated.h"
@@ -17,12 +18,13 @@ public:
 	// Sets default values for this pawn's properties
 	AMyPawn_PlayerCar();
 	UStaticMeshComponent* PawnMesh; 
-
 	void PawnMove(const FInputActionValue& Value);
 	UPROPERTY(EditAnywhere, Category = "Input");
 	UInputAction* MoveAction;
 	UPROPERTY(EditAnywhere, Category = "Input");
 	UInputMappingContext* MappingContext; 
+	//Input variables
+
 
 protected:
 	// Called when the game starts or when spawned

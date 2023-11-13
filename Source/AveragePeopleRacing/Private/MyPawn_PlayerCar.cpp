@@ -17,13 +17,59 @@ AMyPawn_PlayerCar::AMyPawn_PlayerCar()
 
 void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Purple, TEXT("Input Detected")); 
+	const float TopSpeed = 5.0f; 
+	float Speed = 0.0f; 
+    const FVector2D MoveValue = Value.Get<FVector2D>();
+    const FRotator MovementRotation(0, Controller->GetControlRotation().Yaw, 0);
 	const FVector2D MoveAxis = Value.Get<FVector2D>(); 
+//	const FRotator moveRotation(0.0f, Controller->GetControlRotation().Yaw, 0.0f); 
+//	const FVector directionVector = moveRotation.RotateVector(FVector::RightVector);
+//	AddMovementInput(directionVector, MoveAxis.X);
+////If the movement is in the forward or backward direction.MoveAxis.Y > 0.05f || MoveAxis.Y < -0.05f)
+//	const FVector directionVector = moveRotation.RotateVector(FVector::ForwardVector);
+//	AddMovementInput(directionVector, MoveAxis.Y);
 	FVector Location = GetActorLocation();
+	if (MoveAxis.X == 1)
+	{
+		if (Speed < TopSpeed)
+		{
+			while (Speed < TopSpeed)
+			{
+				Speed += 0.0000001; 
+				Location.X += MoveAxis.X + Speed;
+				//set timer or something 
+			}
+		}
+		else 
+		{
+			Speed = 5.0f;
+			Location.X += MoveAxis.X + Speed; 
+		}
+	}
+	if (MoveAxis.Y == -1)
+	{
+		Speed = 0.0f; 
+		if (Speed > -TopSpeed)
+		{
+			while (Speed > -TopSpeed)
+			{
+				Speed -= 0.0000001;
+				Location.Y += MoveAxis.Y + Speed;
+
+			}
+		}
+		else
+		{
+			Speed = -5.0f;
+			Location.Y += MoveAxis.Y + Speed;
+		}
+	}
 	Location.X += MoveAxis.X;
 	Location.Y += MoveAxis.Y;
 	SetActorLocation(Location); 
+
 }
+
 
 // Called when the game starts or when spawned
 void AMyPawn_PlayerCar::BeginPlay()
