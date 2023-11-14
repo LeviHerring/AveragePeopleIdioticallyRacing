@@ -33,12 +33,9 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 	{
 		if (Speed < TopSpeed)
 		{
-			while (Speed < TopSpeed)
-			{
 				Speed += 0.0000001; 
 				Location.X += MoveAxis.X + Speed;
 				//set timer or something 
-			}
 		}
 		else 
 		{
@@ -51,12 +48,9 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 		Speed = 0.0f; 
 		if (Speed > -TopSpeed)
 		{
-			while (Speed > -TopSpeed)
-			{
 				Speed -= 0.0000001;
 				Location.Y += MoveAxis.Y + Speed;
 
-			}
 		}
 		else
 		{
