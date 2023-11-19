@@ -19,20 +19,8 @@ AMyPawn_CarTest::AMyPawn_CarTest()
 
 void AMyPawn_CarTest::EnhancedInputMove(const FInputActionValue& Value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Input Forward"));
-	const FVector2D MoveVector = Value.Get<FVector2D>(); 
-	const FRotator MoveRotation(0.0f, Controller->GetControlRotation().Yaw, 0.0f);
+	const FVector2D MoveVector = Value.Get<FVector2D>();
 
-	if (MoveVector.X > 0.05f || MoveVector.X < -0.05f)
-	{
-		const FVector DirectionVector = MoveRotation.RotateVector(FVector::RightVector);
-		AddMovementInput(DirectionVector, MoveVector.X);
-
-		if (MoveVector.X > 0.05f)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Input Forward" + DirectionVector.ToString()));
-		}
-	}
 }
 
 // Called when the game starts or when spawned
