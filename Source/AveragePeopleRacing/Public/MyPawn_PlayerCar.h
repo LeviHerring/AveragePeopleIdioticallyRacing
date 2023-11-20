@@ -23,6 +23,11 @@ public:
 	UInputAction* MoveAction;
 	UPROPERTY(EditAnywhere, Category = "Input");
 	UInputMappingContext* MappingContext; 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Checkpoints)
+	int MaxCheckpoints; 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Checkpoints)
+	int currentCheckpoint; 
 	//Input variables
 
 

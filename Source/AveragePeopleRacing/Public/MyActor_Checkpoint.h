@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MyPawn_PlayerCar.h"
 #include "GameFramework/Actor.h"
 #include "MyActor_Checkpoint.generated.h"
 
@@ -14,6 +15,19 @@ class AVERAGEPEOPLERACING_API AMyActor_Checkpoint : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AMyActor_Checkpoint();
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class UBoxComponent* CollisionBox;
+
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	AMyPawn_PlayerCar* PlayerCar; 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attributes)
+	int CheckpointNumber; 
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,5 +36,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	
 
 };
