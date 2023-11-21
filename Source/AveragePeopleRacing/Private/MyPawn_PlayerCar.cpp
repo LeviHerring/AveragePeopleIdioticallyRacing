@@ -27,9 +27,9 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 	//{
 		
 		
-		/*const FVector DirectionVector = MoveRotation.RotateVector(FVector::ForwardVector) * 10.0f;
-		AddMovementInput(DirectionVector, MoveVector.X);*/
-		Location.X += MoveVector.X;
+		const FVector DirectionVector = MoveRotation.RotateVector(FVector::ForwardVector) * 10.0f;
+		//AddMovementInput(DirectionVector, MoveVector.X);*/
+		Location += DirectionVector;
 
 		//if (MoveVector.X > 0.05f)
 		//{
@@ -44,7 +44,7 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 		/*const FVector DirectionVector = MoveRotation.RotateVector(FVector::RightVector) * 10.0f;
 		AddMovementInput(DirectionVector, MoveVector.Y);
 		AddActorLocalRotation(FRotator(0, MoveVector.Y/10, 0)); */ 
-		Location.Y += MoveVector.Y; 
+		//Location.Y += MoveVector.Y; 
 
 		//if (MoveVector.Y > 0.05f)
 		//{
