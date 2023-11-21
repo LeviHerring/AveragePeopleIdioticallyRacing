@@ -28,8 +28,17 @@ public:
 	int MaxCheckpoints; 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Checkpoints)
 	int currentCheckpoint; 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Checkpoints)
+	int LapsDone;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Checkpoints)
+	int MaxLaps; 
 	//Input variables
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CarStats)
+	float MaxSpeed = 15.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Checkpoints)
+	int CurrentSpeed; 
 
+	
 
 protected:
 	// Called when the game starts or when spawned
