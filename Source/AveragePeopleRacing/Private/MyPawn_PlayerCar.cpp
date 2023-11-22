@@ -23,6 +23,7 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 	const FVector2D MoveVector = Value.Get<FVector2D>();
 	const FRotator MoveRotation(0.0f, Controller->GetControlRotation().Yaw, 0.0f);
 	FVector Location = GetActorLocation();
+	float PreviousSpeed = 0.01f; 
 	//float Acceleration; 
 	
 		
@@ -33,16 +34,28 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 		{
 			if (MoveVector.X > 0.05f)
 			{
-				if (CurrentSpeed < MaxSpeed)
-				{
-					/*FApp::SetDeltaTime(0); 
-					DirectionVector.X = CurrentSpeed; 
-					Acceleration = CurrentSpeed / FApp::GetDeltaTime(); 
-					Location += DirectionVector - (DirectionVector - 1);
-					CurrentSpeed++; */
-					
-				}
-				//DirectionVector.X = MaxSpeed; 
+				//if (CurrentSpeed < MaxSpeed)
+				//{
+				//	/*if (CurrentSpeed < 0)
+				//	{
+				//		CurrentSpeed = 0; 
+				//	}*/
+				//	//FApp::SetDeltaTime(0);
+				//	/*DirectionVector.X = CurrentSpeed;
+				//	Acceleration = CurrentSpeed / FApp::GetDeltaTime(); 
+				//	Location += DirectionVector - (DirectionVector - 1);*/
+				//	//CurrentSpeed = CurrentSpeed + ((CurrentSpeed - PreviousSpeed) / FApp::GetDeltaTime()) * FApp::GetDeltaTime(); 
+				//	//PreviousSpeed = CurrentSpeed; 
+				//	//DirectionVector.X = CurrentSpeed; 
+				//	Location += DirectionVector; 
+				//	
+				//}
+				//if (CurrentSpeed == MaxSpeed)
+				//{
+				//	//DirectionVector.X = MaxSpeed; 
+				//	//Location += DirectionVector; 
+				//}
+				
 				Location += DirectionVector; 
 			}
 			if (MoveVector.X < -0.05f)
