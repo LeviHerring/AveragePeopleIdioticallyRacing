@@ -35,8 +35,8 @@ public:
 	//Input variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CarStats)
 	float MaxSpeed = 15.0f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Checkpoints)
-	int CurrentSpeed; 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CarStats)
+	float CurrentSpeed; 
 
 	
 

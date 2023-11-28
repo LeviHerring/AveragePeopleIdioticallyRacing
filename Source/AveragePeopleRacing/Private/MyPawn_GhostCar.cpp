@@ -32,7 +32,7 @@ void AMyPawn_GhostCar::Tick(float DeltaTime)
 
 	if (location != Position1 && location != Position2 && location != Position3 && location != Position4)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("In if"));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("In if"));
 
 		/*switch(CurrentPositionNumber)
 		{
