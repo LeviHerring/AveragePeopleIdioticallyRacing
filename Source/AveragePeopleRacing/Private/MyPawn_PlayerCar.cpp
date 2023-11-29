@@ -19,13 +19,12 @@ AMyPawn_PlayerCar::AMyPawn_PlayerCar()
 
 void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 {
-	
 	const FVector2D MoveVector = Value.Get<FVector2D>();
 	const FRotator MoveRotation(0.0f, Controller->GetControlRotation().Yaw, 0.0f);
 	FVector Location = GetActorLocation();
 	float PreviousSpeed = 1.0f; 
 	//float Acceleration; 
-	
+
 		
 		
 		FVector DirectionVector = GetActorForwardVector();
@@ -33,18 +32,21 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 		//AddMovementInput(DirectionVector, MoveVector.X);*/
 		if (MoveVector.X > 0.05f || MoveVector.X < -0.05f)
 		{
-			if (MoveVector.X > 0.05f)
-			{
 				CurrentSpeed = 1; 
+				FApp::SetFixedDeltaTime(0); 
 				//FApp::SetDeltaTime(0); 
 				if (CurrentSpeed < MaxSpeed)
 				{
 					//CurrentSpeed *= FApp::GetDeltaTime();
 					
-					CurrentSpeed = CurrentSpeed + ((CurrentSpeed - PreviousSpeed) / FApp::GetDeltaTime()) * FApp::GetDeltaTime();
+					//CurrentSpeed = CurrentSpeed + ((CurrentSpeed - PreviousSpeed) / FApp::GetDeltaTime()) * FApp::GetDeltaTime();
+					CurrentSpeed = CurrentSpeed + ((CurrentSpeed - PreviousSpeed) / 0.01f) * 0.01f;
 					PreviousSpeed = CurrentSpeed;
-					DirectionVector = DirectionVector * CurrentSpeed * FApp::GetDeltaTime();
+					//DirectionVector = DirectionVector * CurrentSpeed * FApp::GetDeltaTime();
+					DirectionVector = DirectionVector * CurrentSpeed * 0.01f;
+					//CurrentSpeed = CurrentSpeed + 0.6f * FApp::GetDeltaTime(); 
 					Location += DirectionVector;
+					
 				
 					//	/*if (CurrentSpeed < 0)
 					//	{
@@ -57,17 +59,18 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 					//	Location += DirectionVector; 
 					//	
 				}
-				//if (CurrentSpeed == MaxSpeed)
-				//{
-				//	//DirectionVector.X = MaxSpeed; 
-				//	//Location += DirectionVector; 
-				//}
+				CurrentSpeed++;
+				if (CurrentSpeed == MaxSpeed)
+				{
+					DirectionVector = DirectionVector * MaxSpeed; 
+					Location += DirectionVector; 
+				}
 				
 				//Location += DirectionVector; 
-			}
+
 			if (MoveVector.X < -0.05f)
 			{
-				Location -= DirectionVector;
+				Location += DirectionVector;
 			}
 		}
 		if (MoveVector.X == 0)

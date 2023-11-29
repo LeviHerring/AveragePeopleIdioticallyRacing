@@ -30,62 +30,9 @@ void AMyPawn_GhostCar::Tick(float DeltaTime)
 	FVector location = GetActorLocation();
 	FVector PositionDifference;
 
-	if (location != Position1 && location != Position2 && location != Position3 && location != Position4)
-	{
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("In if"));
-
-		/*switch(CurrentPositionNumber)
-		{
-			case 0:
-				PositionDifference = Position1 - location;
-				location += PositionDifference;
-				break;
-			case 1:
-				PositionDifference = Position2 - location;
-				location += PositionDifference;
-				break;
-			case 2:
-				PositionDifference = Position3 - location;
-				location += PositionDifference;
-				break;
-			case 3:
-				PositionDifference = Position4 - location;
-				location += PositionDifference;
-				break;
-
-
-		}*/
-		if (CurrentPositionNumber == 0)
-		{
-			PositionDifference = Position1 - location;
-			location += PositionDifference;
-		}
-	}
-	if (location == Position1)
-	{
-		CurrentPositionNumber = 1; 
-	}
-	if (location == Position2)
-	{
-		CurrentPositionNumber = 2;
-	}
-	if (location == Position3)
-	{
-		CurrentPositionNumber = 3;
-	}
-	if (location == Position4)
-	{
-		CurrentPositionNumber = 4;
-	}
-
 
 }
 
-void AMyPawn_GhostCar::GoToPosition(FVector3d Position, FVector Location)
-{
-	
-	
-}
 
 // Called to bind functionality to input
 void AMyPawn_GhostCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

@@ -17,19 +17,7 @@ public:
 	AMyPawn_GhostCar();
 	UStaticMeshComponent* PawnMesh;
 	
-	UPROPERTY(EditAnywhere, Category = Positions)
-	FVector3d Position1; 
-	UPROPERTY(EditAnywhere, Category = Positions)
-	FVector3d Position2; 
-	UPROPERTY(EditAnywhere, Category = Positions)
-	FVector3d Position3; 
-	UPROPERTY(EditAnywhere, Category = Positions)
-	FVector3d Position4; 
-
 	
-	int CurrentPositionNumber = 0; 
-
-	void GoToPosition(FVector3d Position, FVector Location);
 
 protected:
 	// Called when the game starts or when spawned
