@@ -90,7 +90,12 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 		if (MoveVector.Y > 0.05f || MoveVector.Y < -0.05f)
 		{
 			//AddActorLocalRotation(FRotator(0, MoveVector.Y / 10, 0));
-			AddActorWorldRotation(FRotator(0, MoveVector.Y / 10, 0));
+			if (isDrifting)
+			{
+				AddActorWorldRotation(FRotator(0, MoveVector.Y, 0));
+			}
+				
+			AddActorWorldRotation(FRotator(0, MoveVector.Y / 5, 0));
 			
 
 		}
@@ -98,6 +103,20 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 
 		SetActorLocation(Location); 
 
+}
+
+void AMyPawn_PlayerCar::PawnJump(const FInputActionValue& Value)
+{
+	const FVector2D driftValue = Value.Get<FVector2D>(); 
+
+	if (driftValue.X == 1)
+	{
+		isDrifting = true;
+	}
+	else
+	{
+		isDrifting = false; 
+	}
 }
 
 
@@ -137,5 +156,6 @@ void AMyPawn_PlayerCar::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	UEnhancedInputComponent* PawnInputComp = Cast<UEnhancedInputComponent>(PlayerInputComponent); 
 
 	PawnInputComp->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyPawn_PlayerCar::PawnMove);
+	PawnInputComp->BindAction(MoveActionDrift, ETriggerEvent::Triggered, this, &AMyPawn_PlayerCar::PawnJump);
 }
 

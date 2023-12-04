@@ -43,10 +43,10 @@ void AMyActor_Checkpoint::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AA
 	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, TEXT("Overlap Begin Function Called"));
 	if (PlayerCar && PlayerCar == OtherActor)
 	{
-		//if (PlayerCar->currentCheckpoint == CheckpointNumber)
-		//{
+		if (PlayerCar->currentCheckpoint+1 == CheckpointNumber)
+		{
 			PlayerCar->currentCheckpoint++;
-		//}
+		}
 		
 	}
 }

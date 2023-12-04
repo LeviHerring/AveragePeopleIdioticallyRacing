@@ -19,10 +19,13 @@ public:
 	AMyPawn_PlayerCar();
 	UStaticMeshComponent* PawnMesh; 
 	void PawnMove(const FInputActionValue& Value);
+	void PawnJump(const FInputActionValue& Value);
 	UPROPERTY(EditAnywhere, Category = "Input");
 	UInputAction* MoveAction;
 	UPROPERTY(EditAnywhere, Category = "Input");
 	UInputMappingContext* MappingContext; 
+	UPROPERTY(EditAnywhere, Category = "Input");
+	UInputAction* MoveActionDrift;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Checkpoints)
 	int MaxCheckpoints; 
@@ -36,7 +39,9 @@ public:
 	
 	float CurrentSpeed;
 	float MaxSpeed = 15.f;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test)
+	bool isDrifting = false; 
+	
 	
 
 protected:
