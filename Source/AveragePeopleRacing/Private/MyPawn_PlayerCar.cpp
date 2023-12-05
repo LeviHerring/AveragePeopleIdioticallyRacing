@@ -159,6 +159,9 @@ void AMyPawn_PlayerCar::PawnJump(const FInputActionValue& Value)
 void AMyPawn_PlayerCar::BeginPlay()
 {
 	Super::BeginPlay();
+
+	FTimerHandle TimerHandle;
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMyPawn_PlayerCar::CountDown, 1.f, true, 0.0f);
 	
 }
 
@@ -192,5 +195,19 @@ void AMyPawn_PlayerCar::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 	PawnInputComp->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyPawn_PlayerCar::PawnMove);
 	PawnInputComp->BindAction(MoveActionDrift, ETriggerEvent::Triggered, this, &AMyPawn_PlayerCar::PawnJump);
+}
+
+void AMyPawn_PlayerCar::CountDown()
+{
+	if (Seconds < 0)
+	{
+		Seconds = Seconds + 1;
+	}
+	if (Seconds == 60)
+	{
+		Minutes++;
+		Seconds = 0;
+
+	}
 }
 
