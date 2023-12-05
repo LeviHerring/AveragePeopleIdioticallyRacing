@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "Blueprint/UserWidget.h"
 #include "AveragePeopleRacingGameMode.generated.h"
 
 UCLASS(minimalapi)
@@ -13,6 +14,9 @@ class AAveragePeopleRacingGameMode : public AGameModeBase
 
 public:
 	AAveragePeopleRacingGameMode();
+
+protected:
+
 };
 
 
