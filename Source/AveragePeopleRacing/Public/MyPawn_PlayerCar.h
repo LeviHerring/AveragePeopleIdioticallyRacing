@@ -17,6 +17,7 @@ class AVERAGEPEOPLERACING_API AMyPawn_PlayerCar : public APawn
 public:
 	// Sets default values for this pawn's properties
 	AMyPawn_PlayerCar();
+	UPROPERTY(EditAnywhere); 
 	UStaticMeshComponent* PawnMesh; 
 	void PawnMove(const FInputActionValue& Value);
 	void PawnJump(const FInputActionValue& Value);

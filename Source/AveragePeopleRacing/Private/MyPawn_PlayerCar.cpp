@@ -41,10 +41,14 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 				{
 					if (CurrentSpeed < MaxSpeed)
 					{
+						if (CurrentSpeed <= 0)
+						{
+							CurrentSpeed = 1; 
+						}
 						
 							DirectionVector = DirectionVector * CurrentSpeed;
 							Location += DirectionVector;
-							CurrentSpeed++;
+							CurrentSpeed += 0.1f;
 						
 						//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("In if"));
 
@@ -65,25 +69,45 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 				
 				if (CurrentSpeed >= MaxSpeed)
 				{
-					DirectionVector = DirectionVector * MaxSpeed; 
 					Location += DirectionVector; 
+					DirectionVector = DirectionVector * MaxSpeed; 
 				}
 				
 				//Location += DirectionVector; 
 
 			if (MoveVector.X < -0.05f)
 			{
-				/*if (CurrentSpeed > -MaxSpeed)
+				if (CurrentSpeed > -MaxSpeed)
 				{
-					CurrentSpeed -= 1;
-					DirectionVector = DirectionVector * CurrentSpeed;
-				}*/
+					if (CurrentSpeed >= 0)
+					{
+						CurrentSpeed = -1;
+					}
+					CurrentSpeed -= 0.01f;
+					DirectionVector = DirectionVector * -CurrentSpeed;
+				}
+					
+				
 				Location -= DirectionVector * 2;
 			}
 		}
 		if (MoveVector.X == 0)
 		{
-			CurrentSpeed = 0;
+			CurrentSpeed *= 0;
+			if (CurrentSpeed > 0)
+			{
+				DirectionVector = DirectionVector * CurrentSpeed;
+				Location += DirectionVector;
+				CurrentSpeed -= 0.1; 
+
+			}
+			if (CurrentSpeed < 0)
+			{
+				DirectionVector = DirectionVector * CurrentSpeed;
+				Location -= DirectionVector * 2;
+				CurrentSpeed += 0.1;
+			}
+			
 			DirectionVector = DirectionVector - 1;
 		}
 		
@@ -101,7 +125,7 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 		}
 
 
-		SetActorLocation(Location); 
+		SetActorLocation(Location, true); 
 
 }
 
