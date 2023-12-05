@@ -39,7 +39,7 @@ public:
 	//Input variables
 	
 	float CurrentSpeed;
-	float MaxSpeed = 15.f;
+	float MaxSpeed = 30.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test)
 	bool isDrifting = false; 
 	

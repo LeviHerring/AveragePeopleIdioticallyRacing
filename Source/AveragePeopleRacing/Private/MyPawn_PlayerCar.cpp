@@ -60,18 +60,24 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 						//DirectionVector = DirectionVector * CurrentSpeed * FApp::GetDeltaTime();
 						//CurrentSpeed = CurrentSpeed + 0.6f * FApp::GetDeltaTime(); 
 
-						FString TheFloatStr = FString::SanitizeFloat(CurrentSpeed);
-						GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Red, *TheFloatStr);
+						//FString TheFloatStr = FString::SanitizeFloat(CurrentSpeed);
+						//GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Red, *TheFloatStr);
 
 					}
 				}
-				
-				
 				if (CurrentSpeed >= MaxSpeed)
 				{
-					Location += DirectionVector; 
-					DirectionVector = DirectionVector * MaxSpeed; 
+					DirectionVector = DirectionVector * CurrentSpeed;
+					Location += DirectionVector;
+					
 				}
+				if (CurrentSpeed <= -MaxSpeed)
+				{
+					DirectionVector = DirectionVector * -CurrentSpeed;
+					Location -= DirectionVector * 2;
+				}
+				
+				
 				
 				//Location += DirectionVector; 
 
@@ -85,10 +91,15 @@ void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 					}
 					CurrentSpeed -= 0.01f;
 					DirectionVector = DirectionVector * -CurrentSpeed;
+					Location -= DirectionVector * 2;
 				}
-					
+				if (CurrentSpeed <= -MaxSpeed)
+				{
+					DirectionVector = DirectionVector * -CurrentSpeed;
+					Location -= DirectionVector * 2;
+				}
 				
-				Location -= DirectionVector * 2;
+				
 			}
 		}
 		if (MoveVector.X == 0)
