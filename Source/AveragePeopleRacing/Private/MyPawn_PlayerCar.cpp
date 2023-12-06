@@ -4,6 +4,8 @@
 #include "MyPawn_PlayerCar.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Misc/App.h"
+#include "RacingHUDWidget.h"
+#include "Blueprint/UserWidget.h" 
 #include "EnhancedInput/Public/EnhancedInputSubsystems.h"
 #include "EnhancedInput/Public/EnhancedInputComponent.h"
 
@@ -15,6 +17,8 @@ AMyPawn_PlayerCar::AMyPawn_PlayerCar()
 	PawnMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PawnMesh"));
 	ConstructorHelpers::FObjectFinder<UStaticMesh> MeshRef(TEXT("/Script/Engine.StaticMesh'/Game/StarterContent/Props/SM_Chair.SM_Chair'"));
 	PawnMesh->SetStaticMesh(MeshRef.Object); 
+	PlayerHUDClass = nullptr;
+	PlayerHUD = nullptr; 
 }
 
 void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
@@ -162,6 +166,7 @@ void AMyPawn_PlayerCar::BeginPlay()
 
 	FTimerHandle TimerHandle;
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMyPawn_PlayerCar::CountDown, 1.f, true, 0.0f);
+
 	
 }
 

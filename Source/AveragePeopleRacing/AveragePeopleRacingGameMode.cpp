@@ -3,6 +3,7 @@
 #include "AveragePeopleRacingGameMode.h"
 #include "AveragePeopleRacingCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Blueprint/UserWidget.h"
 
 AAveragePeopleRacingGameMode::AAveragePeopleRacingGameMode()
 {
@@ -12,4 +13,9 @@ AAveragePeopleRacingGameMode::AAveragePeopleRacingGameMode()
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
+}
+
+void AAveragePeopleRacingGameMode::BeginPlay()
+{
+	
 }

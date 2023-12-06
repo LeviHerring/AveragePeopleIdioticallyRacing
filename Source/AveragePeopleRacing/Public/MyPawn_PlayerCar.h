@@ -43,7 +43,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test)
 	bool isDrifting = false; 
 	
-	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class URacingHUDWidget> PlayerHUDClass;
+
+	UPROPERTY()
+	class URacingHUDWidget* PlayerHUD; 
 
 protected:
 	// Called when the game starts or when spawned
