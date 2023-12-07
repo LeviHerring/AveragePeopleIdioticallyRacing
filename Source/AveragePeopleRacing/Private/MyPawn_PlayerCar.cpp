@@ -21,6 +21,19 @@ AMyPawn_PlayerCar::AMyPawn_PlayerCar()
 	PlayerHUD = nullptr; 
 }
 
+
+
+// Called when the game starts or when spawned
+void AMyPawn_PlayerCar::BeginPlay()
+{
+	Super::BeginPlay();
+
+	FTimerHandle TimerHandle;
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMyPawn_PlayerCar::CountDown, 1.f, true, 0.0f);
+
+
+}
+
 void AMyPawn_PlayerCar::PawnMove(const FInputActionValue& Value)
 {
 	const FVector2D MoveVector = Value.Get<FVector2D>();
@@ -158,17 +171,6 @@ void AMyPawn_PlayerCar::PawnJump(const FInputActionValue& Value)
 	}
 }
 
-
-// Called when the game starts or when spawned
-void AMyPawn_PlayerCar::BeginPlay()
-{
-	Super::BeginPlay();
-
-	FTimerHandle TimerHandle;
-	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMyPawn_PlayerCar::CountDown, 1.f, true, 0.0f);
-
-	
-}
 
 // Called every frame
 void AMyPawn_PlayerCar::Tick(float DeltaTime)
