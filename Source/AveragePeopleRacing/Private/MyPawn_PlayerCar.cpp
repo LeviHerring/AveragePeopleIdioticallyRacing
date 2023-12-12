@@ -179,12 +179,22 @@ void AMyPawn_PlayerCar::Tick(float DeltaTime)
 	if (currentCheckpoint == MaxCheckpoints)
 	{
 		LapsDone++; 
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You win!" + currentCheckpoint)); 
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You win!" + currentCheckpoint)); 
 		currentCheckpoint = 0; 
 	}
-	if (LapsDone == MaxLaps)
+	if (LapsDone == MaxLaps + 1)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You win, Laps done!"));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You win, Laps done!"));
+		if (hasWon != true)
+		{
+			YouWinFunction();
+		}
+		if (winCooldown < 0)
+		{
+			GetWorldTimerManager().PauseTimer(winTimerHandle); 
+			winCooldown = 5; 
+		}
+		
 	}
 
 }
@@ -215,5 +225,33 @@ void AMyPawn_PlayerCar::CountDown()
 		Seconds = 0;
 
 	}
+
+	
 }
+
+void AMyPawn_PlayerCar::YouWinFunction()
+{
+	hasWon = true; 
+	winCooldown = 5;
+	GetWorldTimerManager().SetTimer(winTimerHandle, this, &AMyPawn_PlayerCar::WinCountdown, 1.f, true, 0.0f);
+
+}
+
+void AMyPawn_PlayerCar::WinCountdown()
+{
+	if (winCooldown > 0)
+	{
+		winCooldown--; 
+	}
+	else if (winCooldown == 0)
+	{
+		hasWon = true; 
+		LapsDone = 1; 
+		Seconds = 0;
+		Minutes = 0; 
+		winCooldown--; 
+		
+	}
+}
+
 

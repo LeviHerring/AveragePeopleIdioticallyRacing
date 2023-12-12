@@ -43,7 +43,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test)
 	bool isDrifting = false; 
 	
-	
+	 
 
 protected:
 	// Called when the game starts or when spawned
@@ -63,5 +63,16 @@ public:
 	int Minutes = 2;
 	UPROPERTY(BlueprintReadWrite)
 	int Seconds = 0;
+
+	int winCooldown = 5; 
+
+	UPROPERTY(BlueprintReadWrite)
+	bool hasWon = false;
+
+	FTimerHandle winTimerHandle; 
+	
+	void YouWinFunction(); 
+
+	void WinCountdown(); 
 
 };
