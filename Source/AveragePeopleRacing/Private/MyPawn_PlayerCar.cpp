@@ -16,9 +16,7 @@ AMyPawn_PlayerCar::AMyPawn_PlayerCar()
 	PrimaryActorTick.bCanEverTick = true;
 	PawnMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PawnMesh"));
 	ConstructorHelpers::FObjectFinder<UStaticMesh> MeshRef(TEXT("/Script/Engine.StaticMesh'/Game/StarterContent/Props/SM_Chair.SM_Chair'"));
-	PawnMesh->SetStaticMesh(MeshRef.Object); 
-	PlayerHUDClass = nullptr;
-	PlayerHUD = nullptr; 
+	PawnMesh->SetStaticMesh(MeshRef.Object);
 }
 
 
@@ -30,6 +28,7 @@ void AMyPawn_PlayerCar::BeginPlay()
 
 	FTimerHandle TimerHandle;
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMyPawn_PlayerCar::CountDown, 1.f, true, 0.0f);
+	
 
 
 }
@@ -206,7 +205,7 @@ void AMyPawn_PlayerCar::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 void AMyPawn_PlayerCar::CountDown()
 {
-	if (Seconds < 0)
+	if (Seconds < 60)
 	{
 		Seconds = Seconds + 1;
 	}
