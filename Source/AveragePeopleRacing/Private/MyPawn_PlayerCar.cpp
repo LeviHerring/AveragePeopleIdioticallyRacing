@@ -25,7 +25,9 @@ AMyPawn_PlayerCar::AMyPawn_PlayerCar()
 void AMyPawn_PlayerCar::BeginPlay()
 {
 	Super::BeginPlay();
-
+	hasWon = false;
+	//Minutes = 0;
+	//Seconds = 0;
 	FTimerHandle TimerHandle;
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMyPawn_PlayerCar::CountDown, 1.f, true, 0.0f);
 	

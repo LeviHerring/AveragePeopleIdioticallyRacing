@@ -60,7 +60,7 @@ public:
 	void CountDown();
 
 	UPROPERTY(BlueprintReadWrite)
-	int Minutes = 2;
+	int Minutes = 0;
 	UPROPERTY(BlueprintReadWrite)
 	int Seconds = 0;
 
