@@ -26,10 +26,10 @@ void AMyAIController::GetSplinePoints()
 
 		float currentLength = 0;
 		int itemSampling = 5; 
-		int sampleLength = 150; 
+		int sampleLength = 400; 
 
 		FString splineName = SplineComponent->GetName(); 
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("spline found splineName: %s"), *splineName));  
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("spline found splineName: %s"), *splineName));  
 
 		if (splineName == "PathSpline")
 		{
